@@ -14,10 +14,13 @@
 
 <body>
 
+<div th:replace="~{navigation :: navi(Home)}" />
+
 <div class="container">
     <br>
-    <h1>Стартовая страница</h1>
+    <h1>Товары</h1>
 
+    <span th:text="${'Отобрать товары по ценам: ' + products.get(0).title}" />
     <table class="table table-hover">
         <thead class="thead-dark">
         <tr>
@@ -33,12 +36,12 @@
             <td th:text="${product.title}"/>
             <td th:text="${product.cost}"/>
             <td>
-                <a th:href="@{'/info/' + ${product.id}}" th:text="info" />
+                <a th:href="@{'/info/' + ${product.id}}" th:text="Информация" />
             </td>
         </tr>
         </tbody>
     </table>
-    <span th:text="${'First disk title: ' + products.get(0).title}" />
+    <span th:text="${'First product title: ' + products.get(0).title}" />
 </div>
 
 </body>
