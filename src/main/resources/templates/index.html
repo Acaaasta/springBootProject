@@ -20,7 +20,14 @@
     <br>
     <h1>Товары</h1>
 
-    <span th:text="${'Отобрать товары по ценам: ' + products.get(0).title}" />
+    <form th:action="@{/}" method="get">
+        <input th:value="${min}" th:name="min" type="number" placeholder="Минимальная цена">
+        <input th:value="${max}" th:name="max" type="number" placeholder="Максимальная цена">
+        <button type="submit" class="btn btn-primary">Фильтровать</button>
+    </form>
+
+    <span th:if="${page.getContent().size() == 0}">Товаров нет</span>
+    <div th:if="${page.getContent().size() != 0}">
     <table class="table table-hover">
         <thead class="thead-dark">
         <tr>
@@ -31,17 +38,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="product : ${products}">
+        <tr th:each="product : ${page.getContent()}" th:attr="prod_index=${product.id}">
             <td th:text="${product.id}"/>
             <td th:text="${product.title}"/>
-            <td th:text="${product.cost}"/>
             <td>
-                <a th:href="@{'/info/' + ${product.id}}" th:text="Информация" />
+                <span th:text="${product.cost}" th:classAppend="${product.cost > 40.0} ? 'badge badge-danger' : ''" />
             </td>
         </tr>
         </tbody>
     </table>
-    <span th:text="${'First product title: ' + products.get(0).title}" />
+</div>
 </div>
 
 </body>

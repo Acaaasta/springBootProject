@@ -16,7 +16,7 @@ public class Product {
     private String title;
 
     @Column(name="cost")
-    private Float cost;
+    private double cost;
 
     @ManyToMany
     @JoinTable(
@@ -46,11 +46,11 @@ public class Product {
         this.title = title;
     }
 
-    public Float getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(Float cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 
